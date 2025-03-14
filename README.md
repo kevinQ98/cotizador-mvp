@@ -20,9 +20,8 @@ Crea y personaliza tus cotizaciones de manera rápida y profesional con esta apl
 
 ## 🛠 Instalación y Uso
 
-1️⃣ Clona este repositorio:  
-
 ```bash
+1️⃣ Clona este repositorio:  
 git clone https://github.com/tuusuario/generador-cotizaciones.git
 cd generador-cotizaciones
 
