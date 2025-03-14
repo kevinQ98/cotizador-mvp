@@ -4,7 +4,9 @@ import { Control, useFieldArray } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 
 type Props = {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     control: Control<any>;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     watch: any;
 };
 
