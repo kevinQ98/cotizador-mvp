@@ -46,8 +46,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    site: "@tu_usuario",
-    creator: "@tu_usuario",
+    site: "@Qosmo_",
+    creator: "@Qosmo_",
     title: "Generador de Cotizaciones | Personaliza y descarga en PDF",
     description:
       "Crea y personaliza cotizaciones en línea fácilmente. Descarga en PDF y mejora tu negocio con una herramienta intuitiva.",
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: "/favicon.ico",
-    apple: "/apple-touch-icon.png",
+    // apple: "/apple-touch-icon.png",
   },
 };
 

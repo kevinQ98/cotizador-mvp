@@ -22,8 +22,8 @@ Crea y personaliza tus cotizaciones de manera rápida y profesional con esta apl
 
 ```bash
 1️⃣ Clona este repositorio:  
-git clone https://github.com/tuusuario/generador-cotizaciones.git
-cd generador-cotizaciones
+git clone https://github.com/kevinQ98/cotizador-mvp.git
+cd cotizador-mvp
 
 2️⃣ Instala las dependencias:
 
