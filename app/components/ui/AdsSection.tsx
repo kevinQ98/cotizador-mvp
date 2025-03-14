@@ -8,8 +8,8 @@ import {
 import Autoplay from "embla-carousel-autoplay"
 
 const adsData = [
-    { img: "https://images.unsplash.com/photo-1741557571786-e922da981949", link: "https://example1.com" },
-    { img: "https://images.unsplash.com/photo-1741526798351-50eeb46b2a06", link: "https://example2.com" },
+    { img: "/ads1.webp", link: "https://qosmo.vercel.app/" },
+    { img: "/ads2.webp", link: "https://qosmo.gumroad.com/l/xatlt" },
 ];
 
 export default function AdsSection() {

@@ -73,7 +73,7 @@ export function AddItemSheet() {
             <SheetTrigger asChild>
                 <Button variant="default" className="mt-4">Agregar ítem</Button>
             </SheetTrigger>
-            <SheetContent className="p-6 overflow-y-auto">
+            <SheetContent className="p-6 overflow-y-auto w-full">
                 <SheetHeader className="p-0 mt-5">
                     <SheetTitle>Agregar ítem</SheetTitle>
                     <SheetDescription>Complete los detalles del ítem.</SheetDescription>
@@ -100,7 +100,7 @@ export function AddItemSheet() {
 
                     {/* Descripción */}
                     <div className="grid w-full max-w-sm items-center gap-1.5">
-                        <Label htmlFor="descripcion">Descripción</Label>
+                        <Label htmlFor="descripcion">Descripción (Opcional)</Label>
                         <div className="relative">
                             <Input
                                 type="text"

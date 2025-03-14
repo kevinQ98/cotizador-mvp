@@ -128,11 +128,11 @@ export function PdfButton() {
             color: rgb(0, 0, 0),
         });
 
-        yOffset -= 80;
+        yOffset -= 60;
 
         // Customer Information
         const clientInfo = {
-            nombre: (document.getElementById("nombre") as HTMLInputElement)?.value || "Cliente Sin Nombre",
+            nombre: (document.getElementById("nombre") as HTMLInputElement)?.value || "Sin Nombre",
             empresa: (document.getElementById("empresa") as HTMLInputElement)?.value || "",
             email: (document.getElementById("email") as HTMLInputElement)?.value || "",
         };
@@ -236,24 +236,57 @@ export function PdfButton() {
 
         // Table Rows
         items.forEach((item, index) => {
+            // Dibujar el número del ítem
             page.drawText((index + 1).toString(), { x: margin, y: yOffset, size: 10 });
-            page.drawText(filterText(item.nombre), { x: margin + 30, y: yOffset, size: 12, maxWidth: width - 270 });
+
+            // Dibujar el nombre del ítem
+            const nombreLines = splitTextIntoLines(filterText(item.nombre), width - 270, 12); // Dividir el nombre en líneas
+            let nombreYOffset = yOffset;
+            nombreLines.forEach((line) => {
+                page.drawText(line, {
+                    x: margin + 30,
+                    y: nombreYOffset,
+                    size: 12,
+                    lineHeight: 12, // Espaciado entre líneas
+                    maxWidth: width - 270,
+                });
+                nombreYOffset -= 12; // Ajustar la posición Y para la siguiente línea
+            });
+
+            // Dibujar la descripción del ítem (si existe)
+            let descYOffset = nombreYOffset; // Comenzar debajo del nombre
             if (item.descripcion) {
-                page.drawText(filterText(item.descripcion), { x: margin + 30, y: yOffset - 10, size: 8, maxWidth: width - 280 });
+                const descripcionLines = splitTextIntoLines(filterText(item.descripcion), width - 280, 8); // Dividir la descripción en líneas
+                descripcionLines.forEach((line) => {
+                    page.drawText(line, {
+                        x: margin + 30,
+                        y: descYOffset - 15, // Espacio entre nombre y descripción
+                        size: 8,
+                        lineHeight: 10, // Espaciado entre líneas
+                        maxWidth: width - 280,
+                    });
+                    descYOffset -= 10; // Ajustar la posición Y para la siguiente línea
+                });
             }
+
+            // Dibujar precio, cantidad y total
             page.drawText(`$${item.precio.toFixed(2)}`, { x: width - 200, y: yOffset, size: 10 });
             page.drawText(`${item.cantidad}`, { x: width - 130, y: yOffset, size: 10 });
             page.drawText(`$${(item.precio * item.cantidad).toFixed(2)}`, { x: width - 70, y: yOffset, size: 10 });
 
+            // Calcular la posición Y de la línea separadora
+            const separatorY = item.descripcion ? descYOffset - 25 : nombreYOffset - 10;
+
             // Dibujar separador gris suave entre filas
             page.drawLine({
-                start: { x: margin, y: yOffset - 15 },
-                end: { x: width - margin, y: yOffset - 15 },
+                start: { x: margin, y: separatorY },
+                end: { x: width - margin, y: separatorY },
                 thickness: 0.5,
                 color: rgb(0.9, 0.9, 0.9),
             });
 
-            yOffset -= rowHeight + 10;
+            // Ajustar yOffset para el siguiente ítem
+            yOffset = separatorY - 23; // Espacio adicional antes del siguiente ítem
         });
 
         yOffset -= 30;
@@ -286,7 +319,8 @@ export function PdfButton() {
         }
 
         // Footer
-        const footerText = "Gracias por confiar en nosotros. ¡Esperamos hacer negocios contigo!";
+        // const footerText = "Gracias por confiar en nosotros. ¡Esperamos hacer negocios contigo!";
+        const footerText = `Gracias por usar nuestro cotizador. Desarrollado por @qosmo__.`;
         page.drawText(footerText, {
             x: margin,
             y: 40,
@@ -320,8 +354,8 @@ export function PdfButton() {
         <div className="flex flex-col gap-2 p-4 bg-gray-100 rounded-lg">
             <div className="grid w-full items-center gap-3">
                 {/* Title with additional instruction */}
-                <Label htmlFor="logoU" className="font-semibold text-gray-700">
-                    Subir tu Logo (Se recomienda cuadrado)
+                <Label htmlFor="logoU" className="font-bold text-gray-700">
+                    Subir Logo (Se recomienda cuadrado)
                 </Label>
                 <p className="text-sm text-gray-500 mb-2">
                     Por favor, sube una imagen PNG. El logo debe ser cuadrado para una mejor calidad de visualización.
